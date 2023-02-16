@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedProduct, removeSelectedProduct } from '../redux/action/productActions';
+import { fetchProduct, removeSelectedProduct } from '../redux/action/productActions';
 
 
 export const ProductDetail = () => {
@@ -10,16 +9,9 @@ export const ProductDetail = () => {
   const {image, title, price, category, description} = product;
   const dispatch = useDispatch();
   const {productId} = useParams();
-  const fetchProductDetail = async() => {
-    const response = await axios
-    .get(`https://fakestoreapi.com/products/${productId}`)
-    .catch((err) => {
-      console.log("Error", err);
-    });
-    dispatch(selectedProduct(response.data));
-  }
+  
   useEffect(()=>{
-    if(productId && productId !== "") fetchProductDetail();
+    if(productId && productId !== "") dispatch(fetchProduct(productId));
     return() => {
       dispatch(removeSelectedProduct());
     }
@@ -34,12 +26,13 @@ export const ProductDetail = () => {
           <div className="ui vertical divider">AND</div>
           <div className="middle aligned row">
             <div className="column lp">
-              <img className="ui fluid image" src={image} />
+              <img className="ui fluid image" src={image} alt = {title} />
             </div>
             <div className="column rp">
               <h1>{title}</h1>
               <h2>
-                <a className="ui teal tag label">${price}</a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a className="ui teal tag label" >${price}</a>
               </h2>
               <h3 className="ui brown block header">{category}</h3>
               <p>{description}</p>
