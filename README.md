@@ -1,4 +1,4 @@
-#Ecommerce store using Redux
+# Ecommerce store using Redux
 The project related to the eCommerce store. The application will allow users to select eCommerce items from a product catalog, and once an item is selected, the application will fetch and display details about the product using asynchronous action creators.
 The user interface will allow users to browse the eCommerce items and select the desired product. The selection of the product will trigger an asynchronous action creator that will initiate a fetch request to retrieve product details from the fake eCommerce store's API.
 The Redux Thunk middleware will handle the asynchronous request, and once the product details are fetched, they will be stored in the Redux store, and the UI will be updated to display the product details. This will enable users to browse and select eCommerce items, and the application will fetch and display the product details in a seamless and efficient manner.
